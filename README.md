@@ -1,63 +1,54 @@
-# Girlfriend's Day Surprise 💕
+# Girlfriend's Day Surprise
 
-A sweet 5-screen surprise for your girlfriend — deployable on GitHub Pages for free.
+A personal 5-screen letter for your girlfriend — parchment stationery vibe, wax-seal open, playful No button, tap-to-reveal reasons, and a finale hug. Vanilla HTML/CSS/JS. Free on GitHub Pages.
 
-## What's inside
+## Journey
 
-1. **Opening** — Happy Girlfriend's Day, baby girl!
-2. **First meet memory** — Your GGN story in Hindlish
-3. **Playful question** — Dodging "No" button + growing "Yes"
-4. **Reasons you love her** — Staggered Hindlish reasons
-5. **Finale** — Confetti, love note, hugs & kisses
+1. **Loader + envelope** — tap the wax seal to open the letter  
+2. **First meet memory** — your GGN story in Hindlish  
+3. **Playful question** — she must tap **No** first; Yes unlocks after  
+4. **Reasons** — tap each bloom to reveal a line  
+5. **Finale** — confetti, love note, **Send a hug**, screenshot hint  
+
+Music starts **on**; tap **♪** (top right) to mute.
 
 ## Customize
 
-Open `script.js` and edit the `CONFIG` object at the top:
+Edit the `CONFIG` object at the top of `script.js` (name, messages, reasons).
 
-```js
-const CONFIG = {
-  herName: "Baby Girl",  // pet name shown on the site
-  // ... all messages are here
-};
-```
+## Music
 
-No coding needed — just change the text strings.
+The page ships with a **free track** at `assets/soft-song.m4a` (SoundHelix — free generated music). Music starts on; tap **♪** to mute.
+
+**Cannot** bundle viral commercial songs (e.g. “Oye Hoye / Vaah Vaah kya scene hai, teri walk” edits) — those are copyrighted. Don’t download them into this repo.
+
+To use your own legally obtained file:
+1. Replace `assets/soft-song.m4a` (or drop an `.mp3` and point `CONFIG.musicSrc` at it), or
+2. Change `CONFIG.musicSrc` in `script.js`
+
+Browsers may block autoplay until the first tap (opening the seal counts).
 
 ## Deploy to GitHub Pages
 
-1. Create a new **public** repo on GitHub (e.g. `happy-gf-day`)
-2. Upload these files to the **root** of the repo:
-   - `index.html`
-   - `styles.css`
-   - `script.js`
-   - `README.md`
-3. Go to **Settings → Pages**
-4. Under **Source**, select `main` branch and `/ (root)` folder
-5. Click **Save**
-6. Wait ~1 minute — your site will be live at:
-   ```
-   https://<your-username>.github.io/happy-gf-day/
-   ```
-7. Send her the link!
+1. Create a public repo and upload:
+   - `index.html`, `styles.css`, `script.js`, `README.md`
+   - `assets/soft-song.mp3` (optional but recommended)
+2. **Settings → Pages** → branch `main`, folder `/ (root)`
+3. Send her: `https://<you>.github.io/<repo>/`
 
 ## Preview locally
 
-Open `index.html` in your browser, or run:
-
 ```bash
-cd girlfriend-day
 python3 -m http.server 8080
 ```
 
-Then visit `http://localhost:8080`
+Open `http://localhost:8080`
 
 ## Files
 
 | File | Purpose |
 |------|---------|
-| `index.html` | Page structure (5 screens) |
-| `styles.css` | Romantic styling & animations |
-| `script.js` | Navigation, dodging No button, confetti |
-| `README.md` | This file |
-
-No build step, no dependencies — just upload and go.
+| `index.html` | Screens, envelope, loader |
+| `styles.css` | Stationery theme + motion |
+| `script.js` | Navigation, No-first play, music, confetti |
+| `assets/` | Put `soft-song.mp3` here |
