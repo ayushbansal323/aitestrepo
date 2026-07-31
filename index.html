@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Girlfriend's Day, Baby Girl!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="hearts-bg" aria-hidden="true"></div>
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+  <main class="app">
+    <!-- Screen 1 -->
+    <section class="screen active" id="screen-1" data-screen="1">
+      <div class="card">
+        <h1 class="headline" id="screen1-headline"></h1>
+        <p class="subtext" id="screen1-subtext"></p>
+        <button class="btn btn-primary" data-next="2">Open your surprise →</button>
+      </div>
+    </section>
+
+    <!-- Screen 2 -->
+    <section class="screen" id="screen-2" data-screen="2">
+      <div class="card">
+        <p class="label" id="screen2-title"></p>
+        <p class="quote" id="screen2-main"></p>
+        <p class="quote hindlish" id="screen2-memory"></p>
+        <p class="quote hindlish relive" id="screen2-relive"></p>
+        <p class="footnote" id="screen2-footnote"></p>
+        <button class="btn btn-primary" data-next="3">Keep going →</button>
+      </div>
+    </section>
+
+    <!-- Screen 3 -->
+    <section class="screen" id="screen-3" data-screen="3">
+      <div class="card card-wide">
+        <h2 class="question" id="screen3-question"></h2>
+        <p class="dodge-message" id="dodge-message" aria-live="polite"></p>
+        <div class="button-area" id="button-area">
+          <button class="btn btn-yes" id="btn-yes">Yes</button>
+          <button class="btn btn-no" id="btn-no">No</button>
+        </div>
+        <p class="yes-reply hidden" id="yes-reply"></p>
+      </div>
+    </section>
+
+    <!-- Screen 4 -->
+    <section class="screen" id="screen-4" data-screen="4">
+      <div class="card">
+        <h2 class="headline-sm" id="screen4-headline"></h2>
+        <ul class="reasons-list" id="reasons-list"></ul>
+        <button class="btn btn-primary hidden" id="screen4-continue" data-next="5">One more thing →</button>
+      </div>
+    </section>
+
+    <!-- Screen 5 -->
+    <section class="screen" id="screen-5" data-screen="5">
+      <div class="card card-finale">
+        <h1 class="headline" id="screen5-headline"></h1>
+        <p class="love-note" id="screen5-lovenote"></p>
+        <p class="closing" id="screen5-closing"></p>
+      </div>
+    </section>
+  </main>
+
+  <nav class="progress" aria-label="Progress">
+    <button class="back-btn hidden" id="back-btn" aria-label="Go back">←</button>
+    <div class="dots" id="progress-dots">
+      <span class="dot active" data-dot="1"></span>
+      <span class="dot" data-dot="2"></span>
+      <span class="dot" data-dot="3"></span>
+      <span class="dot" data-dot="4"></span>
+      <span class="dot" data-dot="5"></span>
+    </div>
+  </nav>
+
+  <script src="script.js"></script>
+</body>
+</html>
