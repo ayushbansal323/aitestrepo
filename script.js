@@ -41,7 +41,7 @@ const CONFIG = {
     "Thank you for being you, baby girl. Happy Girlfriend's Day — today and every day after. You're my person.",
   screen5Closing: "Now come here — hugs, cuddles, and kisses 🤍",
 
-  musicSrc: "assets/soft-song.m4a",
+  musicSrc: "soft-song.m4a",
 
   // WhatsApp: India (+91) + 7776075075
   whatsappNumber: "917776075075",
