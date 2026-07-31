@@ -309,39 +309,64 @@ function initGlitter() {
   }
 }
 
+const SPRINKLE_COLORS = [
+  "#ff8ec5",
+  "#ffd76a",
+  "#ffc0d4",
+  "#ffffff",
+  "#ff9ec8",
+  "#ffe08a",
+  "#ffb6d9",
+];
+
 function initSprinkles() {
   if (prefersReducedMotion) return;
 
   const container = document.querySelector(".sprinkles-bg");
-  if (!container) return;
-
-  const colors = [
-    "#ff6b9d",
-    "#ffd76a",
-    "#ffb6c9",
-    "#fff5f8",
-    "#e891a8",
-    "#ff8fab",
-    "#f4c430",
-    "#ffcce0",
-  ];
-  const count = isMobile() ? 28 : 42;
-
-  for (let i = 0; i < count; i++) {
-    const bit = document.createElement("span");
-    const round = Math.random() > 0.65;
-    bit.className = `sprinkle${round ? " is-round" : ""}`;
-    bit.style.left = `${Math.random() * 100}%`;
-    bit.style.background = colors[Math.floor(Math.random() * colors.length)];
-    bit.style.animationDuration = `${7 + Math.random() * 9}s`;
-    bit.style.animationDelay = `${Math.random() * 8}s`;
-    if (!round) {
-      bit.style.width = `${7 + Math.random() * 6}px`;
-      bit.style.height = `${2.5 + Math.random() * 2}px`;
-      bit.style.transform = `rotate(${Math.random() * 360}deg)`;
+  if (container) {
+    const count = isMobile() ? 36 : 52;
+    for (let i = 0; i < count; i++) {
+      const bit = document.createElement("span");
+      const round = Math.random() > 0.7;
+      const color =
+        SPRINKLE_COLORS[Math.floor(Math.random() * SPRINKLE_COLORS.length)];
+      bit.className = `sprinkle${round ? " is-round" : ""}`;
+      bit.style.left = `${Math.random() * 100}%`;
+      bit.style.setProperty("--sprinkle", color);
+      bit.style.animationDuration = `${7 + Math.random() * 9}s`;
+      bit.style.animationDelay = `${Math.random() * 8}s`;
+      if (!round) {
+        bit.style.width = `${3.5 + Math.random() * 2.5}px`;
+        bit.style.height = `${1.2 + Math.random() * 0.6}px`;
+      }
+      container.appendChild(bit);
     }
-    container.appendChild(bit);
   }
+
+  // Tiny shiny sprinkles on every letter card
+  document.querySelectorAll(".letter-card").forEach((card) => {
+    const n = isMobile() ? 18 : 26;
+    for (let i = 0; i < n; i++) {
+      const bit = document.createElement("span");
+      const round = Math.random() > 0.6;
+      const rot = Math.floor(Math.random() * 360);
+      const color =
+        SPRINKLE_COLORS[Math.floor(Math.random() * SPRINKLE_COLORS.length)];
+      bit.className = `card-sprinkle${round ? " is-round" : ""}`;
+      bit.setAttribute("aria-hidden", "true");
+      bit.style.left = `${4 + Math.random() * 92}%`;
+      bit.style.top = `${4 + Math.random() * 92}%`;
+      bit.style.setProperty("--sprinkle", color);
+      bit.style.setProperty("--rot", `${rot}deg`);
+      bit.style.animationDuration = `${1.4 + Math.random() * 2}s`;
+      bit.style.animationDelay = `${Math.random() * 2.5}s`;
+      if (!round) {
+        bit.style.width = `${3 + Math.random() * 2}px`;
+        bit.style.height = `${1.2 + Math.random() * 0.5}px`;
+      }
+      card.appendChild(bit);
+    }
+  });
 }
 
 function lockYes() {
