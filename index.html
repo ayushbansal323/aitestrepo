@@ -11,6 +11,8 @@
 </head>
 <body>
   <div class="paper-grain" aria-hidden="true"></div>
+  <div class="glitter-bg" aria-hidden="true"></div>
+  <div class="sprinkles-bg" aria-hidden="true"></div>
   <div class="hearts-bg" aria-hidden="true"></div>
   <canvas id="confetti-canvas" aria-hidden="true"></canvas>
   <div class="hug-bloom hidden" id="hug-bloom" aria-hidden="true"></div>
@@ -26,7 +28,7 @@
     <span class="music-icon" id="music-icon">♪</span>
   </button>
 
-  <audio id="bg-music" src="soft-song.m4a" loop preload="auto"></audio>
+  <audio id="bg-music" src="soft-song.mp3" loop preload="auto"></audio>
 
   <main class="app">
     <!-- Screen 1 -->
@@ -79,12 +81,16 @@
 
     <!-- Screen 4 -->
     <section class="screen" id="screen-4" data-screen="4">
-      <div class="card letter-card">
-        <h2 class="headline-sm stagger-item" id="screen4-headline"></h2>
-        <p class="reasons-cue" id="reasons-cue">Tap a bloom to reveal a reason</p>
-        <div class="reason-blooms" id="reason-blooms" role="group" aria-label="Reasons to reveal"></div>
-        <ul class="reasons-list" id="reasons-list"></ul>
-        <button class="btn btn-primary hidden scale-in" id="screen4-continue" data-next="5">One more thing →</button>
+      <div class="card letter-card card-reasons">
+        <div class="reasons-body">
+          <h2 class="headline-sm stagger-item" id="screen4-headline"></h2>
+          <p class="reasons-cue" id="reasons-cue">Tap a bloom to reveal a reason</p>
+          <div class="reason-blooms" id="reason-blooms" role="group" aria-label="Reasons to reveal"></div>
+          <ul class="reasons-list" id="reasons-list"></ul>
+        </div>
+        <div class="reasons-footer">
+          <button class="btn btn-primary hidden scale-in" id="screen4-continue" data-next="5">One more thing →</button>
+        </div>
       </div>
     </section>
 

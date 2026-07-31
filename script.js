@@ -41,7 +41,7 @@ const CONFIG = {
     "Thank you for being you, baby girl. Happy Girlfriend's Day — today and every day after. You're my person.",
   screen5Closing: "Now come here — hugs, cuddles, and kisses 🤍",
 
-  musicSrc: "soft-song.m4a",
+  musicSrc: "soft-song.mp3",
 
   // WhatsApp: India (+91) + 7776075075
   whatsappNumber: "917776075075",
@@ -263,14 +263,85 @@ function setupTapReasons() {
       if (revealedCount >= CONFIG.reasons.length) {
         cue.textContent = "That’s all of them…";
         cue.classList.add("is-done");
-        setTimeout(
-          () => continueBtn.classList.remove("hidden"),
-          prefersReducedMotion ? 0 : 350
-        );
+        setTimeout(() => {
+          continueBtn.classList.remove("hidden");
+          // Keep CTA in view on mobile — don't make her hunt below the fold
+          continueBtn.scrollIntoView({
+            behavior: prefersReducedMotion ? "auto" : "smooth",
+            block: "nearest",
+          });
+        }, prefersReducedMotion ? 0 : 350);
+      } else {
+        // Keep latest reason readable without burying the blooms
+        li.scrollIntoView({
+          behavior: prefersReducedMotion ? "auto" : "smooth",
+          block: "nearest",
+        });
       }
     });
     blooms.appendChild(btn);
   });
+}
+
+function initGlitter() {
+  if (prefersReducedMotion) return;
+
+  const container = document.querySelector(".glitter-bg");
+  if (!container) return;
+
+  const count = isMobile() ? 36 : 56;
+  const kinds = ["", "is-gold", "is-pink", "is-diamond"];
+
+  for (let i = 0; i < count; i++) {
+    const dot = document.createElement("span");
+    const kind = kinds[Math.floor(Math.random() * kinds.length)];
+    dot.className = `glitter-dot${kind ? ` ${kind}` : ""}`;
+    dot.style.left = `${Math.random() * 100}%`;
+    dot.style.top = `${Math.random() * 100}%`;
+    dot.style.animationDuration = `${1.4 + Math.random() * 2.8}s`;
+    dot.style.animationDelay = `${Math.random() * 4}s`;
+    const size = 2 + Math.random() * 4;
+    if (!kind.includes("diamond")) {
+      dot.style.width = `${size}px`;
+      dot.style.height = `${size}px`;
+    }
+    container.appendChild(dot);
+  }
+}
+
+function initSprinkles() {
+  if (prefersReducedMotion) return;
+
+  const container = document.querySelector(".sprinkles-bg");
+  if (!container) return;
+
+  const colors = [
+    "#ff6b9d",
+    "#ffd76a",
+    "#ffb6c9",
+    "#fff5f8",
+    "#e891a8",
+    "#ff8fab",
+    "#f4c430",
+    "#ffcce0",
+  ];
+  const count = isMobile() ? 28 : 42;
+
+  for (let i = 0; i < count; i++) {
+    const bit = document.createElement("span");
+    const round = Math.random() > 0.65;
+    bit.className = `sprinkle${round ? " is-round" : ""}`;
+    bit.style.left = `${Math.random() * 100}%`;
+    bit.style.background = colors[Math.floor(Math.random() * colors.length)];
+    bit.style.animationDuration = `${7 + Math.random() * 9}s`;
+    bit.style.animationDelay = `${Math.random() * 8}s`;
+    if (!round) {
+      bit.style.width = `${7 + Math.random() * 6}px`;
+      bit.style.height = `${2.5 + Math.random() * 2}px`;
+      bit.style.transform = `rotate(${Math.random() * 360}deg)`;
+    }
+    container.appendChild(bit);
+  }
 }
 
 function lockYes() {
@@ -534,7 +605,11 @@ function tryPlayMusic() {
   const audio = document.getElementById("bg-music");
   if (!musicWantedOn || !audio) return;
 
-  audio.volume = 0.35;
+  if (CONFIG.musicSrc && audio.getAttribute("src") !== CONFIG.musicSrc) {
+    audio.src = CONFIG.musicSrc;
+  }
+
+  audio.volume = 0.45;
   const play = audio.play();
   if (play && typeof play.then === "function") {
     play
@@ -556,7 +631,7 @@ function initMusic() {
   if (saved === "1") musicWantedOn = false;
 
   updateMusicUI();
-  tryPlayMusic();
+  // Do not autoplay on load — start when she taps the seal
 
   toggle.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -564,17 +639,8 @@ function initMusic() {
     sessionStorage.setItem("gf-music-muted", musicWantedOn ? "0" : "1");
     updateMusicUI();
     if (musicWantedOn) tryPlayMusic();
-    else {
-      audio.pause();
-    }
+    else audio.pause();
   });
-
-  // Autoplay often blocked until first gesture — resume then
-  const unlock = () => {
-    if (musicWantedOn && !musicStarted) tryPlayMusic();
-  };
-  document.addEventListener("pointerdown", unlock, { once: false });
-  document.addEventListener("touchstart", unlock, { once: false });
 }
 
 /* —— Loader + envelope —— */
@@ -595,6 +661,11 @@ function initEnvelope() {
     if (envelopeOpened) return;
     envelopeOpened = true;
     envelope.classList.add("is-open");
+
+    // Start her song on first seal tap (user gesture unlocks audio)
+    musicWantedOn = true;
+    sessionStorage.setItem("gf-music-muted", "0");
+    updateMusicUI();
     tryPlayMusic();
 
     if (prefersReducedMotion) {
@@ -672,6 +743,8 @@ window.addEventListener("resize", () => {
 
 initContent();
 initHearts();
+initGlitter();
+initSprinkles();
 initNavigation();
 initScreen3();
 initLoader();

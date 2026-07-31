@@ -18,21 +18,15 @@ Edit the `CONFIG` object at the top of `script.js` (name, messages, reasons).
 
 ## Music
 
-The page ships with a **free track** at `soft-song.m4a` next to `index.html` (SoundHelix — free generated music). Music starts on; tap **♪** to mute.
+Put your song as `soft-song.mp3` next to `index.html`. It starts when she taps the wax seal. Tap **♪** to mute.
 
-**Cannot** bundle viral commercial songs (e.g. “Oye Hoye / Vaah Vaah kya scene hai, teri walk” edits) — those are copyrighted. Don’t download them into this repo.
-
-To use your own legally obtained file:
-1. Replace `soft-song.m4a` in the same folder as `index.html` (or drop an `.mp3` and point `CONFIG.musicSrc` at it), or
-2. Change `CONFIG.musicSrc` in `script.js`
-
-Browsers may block autoplay until the first tap (opening the seal counts).
+Or change the filename in `CONFIG.musicSrc` in `script.js`.
 
 ## Deploy to GitHub Pages
 
 1. Create a public repo and upload:
    - `index.html`, `styles.css`, `script.js`, `README.md`
-   - `soft-song.m4a` (optional but recommended)
+   - `soft-song.mp3`
 2. **Settings → Pages** → branch `main`, folder `/ (root)`
 3. Send her: `https://<you>.github.io/<repo>/`
 
@@ -51,4 +45,4 @@ Open `http://localhost:8080`
 | `index.html` | Screens, envelope, loader |
 | `styles.css` | Stationery theme + motion |
 | `script.js` | Navigation, No-first play, music, confetti |
-| `soft-song.m4a` | Background music (same folder as index) |
+| `soft-song.mp3` | Song (plays on seal tap) |
